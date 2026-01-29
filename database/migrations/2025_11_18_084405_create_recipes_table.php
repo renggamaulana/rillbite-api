@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('recipes', function (Blueprint $table) {
@@ -21,7 +18,7 @@ return new class extends Migration
             $table->integer('health_score')->default(50);
             $table->decimal('price_per_serving', 8, 2)->default(0);
             $table->text('instructions')->nullable();
-            $table->json('categories')->nullable(); // ['healthy', 'chicken', 'vegetarian']
+            $table->json('categories')->nullable();
             $table->boolean('vegetarian')->default(false);
             $table->boolean('vegan')->default(false);
             $table->boolean('gluten_free')->default(false);
@@ -30,11 +27,8 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('nutrition');
+        Schema::dropIfExists('recipes');
     }
 };

@@ -8,19 +8,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('nutrition', function (Blueprint $table) {
+        Schema::create('diet_plans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('name')->default('My Diet Plan');
+            $table->string('day_of_week');
+            $table->string('meal_type');
             $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
-            $table->decimal('calories', 8, 2)->default(0);
-            $table->decimal('protein', 8, 2)->default(0);
-            $table->decimal('fat', 8, 2)->default(0);
-            $table->decimal('carbohydrates', 8, 2)->default(0);
+            $table->integer('week_number')->default(1);
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('nutrition');
+        Schema::dropIfExists('diet_plans');
     }
 };

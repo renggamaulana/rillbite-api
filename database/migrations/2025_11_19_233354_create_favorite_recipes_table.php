@@ -8,19 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('nutrition', function (Blueprint $table) {
+        Schema::create('favorite_recipes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
-            $table->decimal('calories', 8, 2)->default(0);
-            $table->decimal('protein', 8, 2)->default(0);
-            $table->decimal('fat', 8, 2)->default(0);
-            $table->decimal('carbohydrates', 8, 2)->default(0);
             $table->timestamps();
+
+            $table->unique(['user_id', 'recipe_id']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('nutrition');
+        Schema::dropIfExists('favorite_recipes');
     }
 };

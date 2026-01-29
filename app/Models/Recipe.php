@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Recipe extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'title',
         'summary',
@@ -28,27 +31,20 @@ class Recipe extends Model
         'vegan' => 'boolean',
         'gluten_free' => 'boolean',
         'dairy_free' => 'boolean',
-        'price_per_serving' => 'decimal:2',
     ];
 
-    // OPTIONAL: untuk filtering cepat
-    public function scopeVegetarian($query)
+    public function ingredients()
     {
-        return $query->where('vegetarian', true);
+        return $this->hasMany(Ingredient::class);
     }
 
-    public function scopeVegan($query)
+    public function nutrition()
     {
-        return $query->where('vegan', true);
+        return $this->hasOne(Nutrition::class);
     }
 
-    public function scopeGlutenFree($query)
+    public function favoritedBy()
     {
-        return $query->where('gluten_free', true);
-    }
-
-    public function scopeDairyFree($query)
-    {
-        return $query->where('dairy_free', true);
+        return $this->belongsToMany(User::class, 'favorite_recipes')->withTimestamps();
     }
 }

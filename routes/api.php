@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RecipeController;
 use App\Http\Controllers\Api\FavoriteController;
 use App\Http\Controllers\Api\DietPlanController;
+use App\Http\Controllers\Api\UserRecipeController;
 use Illuminate\Http\Request;
 
 // Public routes
@@ -25,6 +26,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/user', [AuthController::class, 'user']);
+    });
+
+     // Admin only routes for managing user recipes
+    Route::middleware('admin')->prefix('user-recipes')->group(function () {
+        Route::get('/', [UserRecipeController::class, 'index']);
+        Route::post('/', [UserRecipeController::class, 'store']);
+        Route::get('/{id}', [UserRecipeController::class, 'show']);
+        Route::put('/{id}', [UserRecipeController::class, 'update']);
+        Route::delete('/{id}', [UserRecipeController::class, 'destroy']);
     });
 
     Route::prefix('favorites')->group(function () {

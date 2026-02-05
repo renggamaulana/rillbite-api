@@ -29,6 +29,7 @@ class AuthController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'role' => 'user',
             ]);
 
             $token = $user->createToken('auth_token')->plainTextToken;
@@ -39,6 +40,7 @@ class AuthController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
+                    'role' => $user->role
                 ],
                 'access_token' => $token,
                 'token_type' => 'Bearer',
@@ -83,6 +85,7 @@ class AuthController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
+                    'role' => $user->role
                 ],
                 'access_token' => $token,
                 'token_type' => 'Bearer',
@@ -132,6 +135,7 @@ class AuthController extends Controller
                     'id' => $request->user()->id,
                     'name' => $request->user()->name,
                     'email' => $request->user()->email,
+                    'role' => $request->user()->role,
                     'created_at' => $request->user()->created_at,
                 ],
             ], 200);
@@ -164,6 +168,7 @@ class AuthController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
+                    'role' => $user->role
                 ],
             ], 200);
         } catch (\Exception $e) {

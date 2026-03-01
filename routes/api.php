@@ -40,6 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('favorites')->group(function () {
         Route::get('/', [FavoriteController::class, 'index']);
+        Route::get('/check/{recipeId}', [FavoriteController::class, 'check']);
         Route::post('/{recipeId}', [FavoriteController::class, 'store']);
         Route::delete('/{recipeId}', [FavoriteController::class, 'destroy']);
         Route::post('/toggle/{recipeId}', [FavoriteController::class, 'toggle']);

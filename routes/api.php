@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/user', [AuthController::class, 'user']);
+        Route::put('/update-profile', [AuthController::class, 'updateProfile']);
     });
 
      // Admin only routes for managing user recipes

@@ -49,8 +49,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('diet-plans')->group(function () {
         Route::get('/', [DietPlanController::class, 'index']);
         Route::post('/', [DietPlanController::class, 'store']);
-        Route::delete('/{id}', [DietPlanController::class, 'destroy']);
         Route::delete('/clear', [DietPlanController::class, 'clear']);
+        Route::delete('/{id}', [DietPlanController::class, 'destroy']);
     });
 });
 

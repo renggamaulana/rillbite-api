@@ -8,6 +8,7 @@ return [
         'http://localhost:3001',
         'http://127.0.0.1:3000',
         'https://rillbite.vercel.app',
+        'https://rillbite.com',
     ],
     'allowed_headers' => ['*'],
     'exposed_headers' => [],

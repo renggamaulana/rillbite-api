@@ -1,0 +1,17 @@
+[
+  {
+    "id": "deploy",
+    "execute-command": "/var/www/rillbite-api/deploy.sh",
+    "command-working-directory": "/var/www/rillbite-api",
+    "trigger-rule": {
+      "match": {
+        "type": "value",
+        "value": "refs/heads/main",
+        "parameter": {
+          "source": "payload",
+          "name": "ref"
+        }
+      }
+    }
+  }
+]
